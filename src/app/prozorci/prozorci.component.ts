@@ -69,8 +69,7 @@ export class ProzorciComponent implements OnInit {
 
 
 
-    return this.prozorecService.getProzorci()
-      .subscribe(prozorci => this.prozorci = prozorci);
+    this.prozorci = this.prozorecService.getProzorci();
 
   }
 
