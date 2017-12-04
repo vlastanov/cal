@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { ProzorciComponent } from './prozorci.component';
 import { ProzorecDetailComponent } from './prozorec-detail/prozorec-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TablicaComponent } from './tablica/tablica.component';
 
 
 @NgModule({
   declarations: [
     ProzorciComponent,
-    ProzorecDetailComponent
+    ProzorecDetailComponent,
+    TablicaComponent
   ],
   imports: [
     BrowserModule,

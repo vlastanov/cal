@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProzorecService } from './prozorec.service';
-
-import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { Prozorec, Staklopaket2, Staklopaket, Kommerling76, Kbe, Profil, tipoveShema, tipoveProzorec } from './obshta';
 
 import {
   FormBuilder, FormControl,
@@ -24,34 +21,20 @@ export class ProzorciComponent implements OnInit {
   get height() { return this.prozorecForm.get('height'); }
   kartinka: number;
 
-  selectedProzorec: Prozorec;
-  displayedColumns = ['id', 'width', 'height', 'type', 'shema', 'kartinka'];
-
-
   prozorci: Prozorec[] = [];
   tipoveProzorec = tipoveProzorec;
   tipoveShema = tipoveShema;
-
-  prozorec = new Prozorec();
   count = 0;
-  staklopaket: Staklopaket = new Staklopaket();
 
+  staklopaket2: Staklopaket2 = new Staklopaket2();
 
   prozorecForm: FormGroup;
-  selectedPro: number;
 
   constructor(private prozorecService: ProzorecService) { }
 
-  onSelect(prozorec: Prozorec): void {
-    this.selectedProzorec = prozorec;
-  }
 
   onClickMe(val: any) {
     this.kartinka = val;
-  }
-
-  getSelected(prozorec: Prozorec): boolean {
-    return prozorec.id === this.selectedPro;
   }
 
   passwordMatchValidator(g: FormGroup) {
@@ -67,148 +50,26 @@ export class ProzorciComponent implements OnInit {
       'shema': new FormControl('', [Validators.required]),
     }, this.passwordMatchValidator);
 
-
-
     this.prozorci = this.prozorecService.getProzorci();
-
   }
 
   onSubmit() {
     const id = this.count++;
-    this.prozorci.push(new Prozorec(
-      id,
+    const proz = new Prozorec(id,
       this.width.value,
       this.height.value,
       this.type.value,
       this.shema.value,
-      this.kartinka));
+      this.kartinka);
 
-    this.calculateStaklopaket();
+    this.prozorci.push(proz);
+
+    this.staklopaket2.calculateStaklopaket(proz);
 
   }
 
-  calculateByShema(profil: Profil): void {
-    switch (this.shema.value) {
-      case 'fix': {
-        const razlikaLqvoDqsnoGoreDolu = profil.kasaDebelina - profil.zastapStaklopaketKasa;
 
-        this.staklopaket.width = this.width.value - 2 * razlikaLqvoDqsnoGoreDolu;
-        this.staklopaket.height = this.height.value - 2 * razlikaLqvoDqsnoGoreDolu;
-        break;
-      }
-      case 'ednokril': {
-
-        const razlikaLqvoDqsnoGoreDolu = profil.kasaDebelina
-          + (profil.kriliDebelina - profil.zastapKriloKasa)
-          - profil.zastapStaklopaketKasa;
-
-        this.staklopaket.width = this.width.value - 2 * razlikaLqvoDqsnoGoreDolu;
-        this.staklopaket.height = this.height.value - 2 * razlikaLqvoDqsnoGoreDolu;
-        console.log(this.staklopaket.width);
-        break;
-      }
-      case 'dvukril': {
-        const razlikaLqvo = profil.kasaDebelina
-          + (profil.kriliDebelina - profil.zastapKriloKasa)
-          - profil.zastapStaklopaketKasa;
-        const razlikaDqsno = (profil.letqshDelitelDebelina - 2 * profil.zastapLetqshDelitelKrilo) / 2
-          + profil.kriliDebelina
-          - profil.zastapStaklopaketKasa;
-        const razlikaGoreDolu = profil.kasaDebelina
-          + (profil.kriliDebelina - profil.zastapKriloKasa)
-          - profil.zastapStaklopaketKasa;
-
-        this.staklopaket.width = this.width.value / 2 - (razlikaLqvo + razlikaDqsno);
-        this.staklopaket.height = this.height.value - 2 * razlikaGoreDolu;
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
-
-  calculateStaklopaket() {
-    switch (this.type.value) {
-      case 'KBE': {
-        this.calculateByShema(new Kbe());
-        break;
-      }
-      case 'Kommerling 76': {
-        this.calculateByShema(new Kommerling76());
-        break;
-      }
-      case 'KMG 4': {
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
 
 }
 
-export class Prozorec {
-  constructor(
-    public id?: number,
-    public width?: number,
-    public height?: number,
-    public type?: string,
-    public shema?: string,
-    public kartinka?: number
-  ) { }
-}
-
-
-export const tipoveProzorec = [
-  { value: 'KBE', viewValue: 'KBE' },
-  { value: 'Kommerling 76', viewValue: 'Kommerling 76' },
-  { value: 'KMG 4', viewValue: 'KMG 4' }
-];
-
-export const tipoveShema = [
-  { value: 'ednokril', viewValue: 'еднокрил', },
-  { value: 'dvukril', viewValue: 'двукрил' },
-  { value: 'fix', viewValue: 'фикс' }
-];
-
-
-export interface Profil {
-  kasaDebelina: number;
-  kriliDebelina: number;
-  letqshDelitelDebelina: number;
-  zastapStaklopaketKasa: number;
-  zastapKriloKasa: number;
-  zastapLetqshDelitelKrilo: number;
-
-}
-
-export class Kbe implements Profil {
-  kasaDebelina = 63;
-  kriliDebelina = 77;
-  letqshDelitelDebelina = 64;
-  zastapStaklopaketKasa = 15;
-  zastapKriloKasa = 28;
-  zastapLetqshDelitelKrilo = 28;
-}
-
-
-export class Kommerling76 implements Profil {
-  kasaDebelina = 67;
-  kriliDebelina = 78;
-  letqshDelitelDebelina = 66;
-  zastapStaklopaketKasa = 16;
-  zastapKriloKasa = 29;
-  zastapLetqshDelitelKrilo = 30;
-}
-
-
-export class Staklopaket {
-  id = 0;
-  width = 0;
-  height = 0;
-  type = '';
-  shema = '';
-}
 

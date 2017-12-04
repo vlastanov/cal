@@ -1,25 +1,18 @@
-<app-prozorec-detail [prozorec]="selectedProzorec"></app-prozorec-detail>
-
 <div class="containter">
-
-
   <div class="row">
-
-
     <div class="col-md-4">
 
       <h3>Създай позиция</h3>
 
       <form (ngSubmit)="onSubmit()" [formGroup]="prozorecForm" #formDir="ngForm">
-        <div *ngIf="this.prozorecForm.invalid && (this.prozorecForm.dirty || this.prozorecForm.touched)">ddd</div>
+
+        <div *ngIf="this.prozorecForm.invalid &&
+        (this.prozorecForm.dirty || this.prozorecForm.touched)">ddd</div>
         <div [hidden]="formDir.submitted">
 
-
           <div class="form-group">
-
             <label for="width">Ширина:</label>
             <input id="width" class="form-control" formControlName="width">
-
             <div *ngIf="width.invalid && (width.dirty || width.touched)" class="alert alert-danger">
 
               <div *ngIf="width.errors.required">
@@ -34,7 +27,6 @@
               <div *ngIf="width.errors.mismatch">ddd</div>
 
             </div>
-
           </div>
 
           <div class="form-group">
@@ -57,12 +49,6 @@
 
           </div>
 
-
-
-
-
-
-
           <div class="form-group">
             <label for="type">Профил:</label>
             <select id="type" class="form-control" formControlName="type">
@@ -74,7 +60,6 @@
               <div *ngIf="type.errors.required">профил is required.</div>
             </div>
           </div>
-
 
           <div class="form-group">
             <label for="shema">Схема:</label>
@@ -88,67 +73,23 @@
             </div>
           </div>
 
-
           <button type="submit" class="btn btn-default" [disabled]="prozorecForm.invalid">Submit</button>
           <button type="button" class="btn btn-default" (click)="formDir.resetForm({})">Reset</button>
         </div>
 
-
-
       </form>
 
       <div class="submitted-message" *ngIf="formDir.submitted">
-        <p>You've submitted your hero, {{ prozorecForm.value.name }}!</p>
-        <button (click)="formDir.resetForm({})">Add new hero</button>
+        <p>You've submitted your prozorec, {{ prozorecForm.value.name }}!</p>
+        <button (click)="formDir.resetForm({})">Add new prozorec</button>
       </div>
-
-      <app-prozorec-detail [prozorec]="selectedProzorec"></app-prozorec-detail>
     </div>
 
     <div class="col-md-8">
-
-      <table class="table table-sm table-bordered table-striped">
-        <thead>
-          <tr class="prozorci">
-            <th [attr.colspan]="1">{{this.displayedColumns[0]}}</th>
-            <th>{{this.displayedColumns[1]}}</th>
-            <th>{{this.displayedColumns[2]}}</th>
-            <th>{{this.displayedColumns[3]}}</th>
-            <th>{{this.displayedColumns[4]}}</th>
-            <th>{{this.displayedColumns[5]}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let prozorec of prozorci; let odd = odd"
-          (click)="onSelect(prozorec)" (mouseover)="this.selectedPro=prozorec.id"
-            [class.bg-info]="getSelected(prozorec)">
-
-            <td>{{prozorec.id}} </td>
-            <td>{{prozorec.width}}</td>
-            <td>{{prozorec.height}}</td>
-            <td>{{prozorec.type}}</td>
-            <td>{{prozorec.shema}}</td>
-            <td *ngIf="prozorec.kartinka">
-
-              <img [src]="prozorec.kartinka" alt="" [style.width.px]="50" [style.height.px]="50">
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-tablica [tablicaProzorci]="prozorci"></app-tablica>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-<div>
-  <br> Ширина (стъклопакет):{{staklopaket.width}}
-  <br> Височина (стъклопакет):{{staklopaket.height}}
-</div>
-
 
 <div class="bg-warning" [ngSwitch]="this.shema.value">
   <div *ngSwitchCase="'ednokril'">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Prozorec } from '../prozorci/prozorci.component';
+import { Prozorec } from './obshta';
 
 
 const prozorci = [

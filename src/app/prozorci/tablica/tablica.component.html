@@ -1,0 +1,34 @@
+<table class="table table-sm table-bordered table-striped">
+  <thead>
+    <tr class="prozorci">
+      <th [attr.colspan]="1">{{this.displayedColumns[0]}}</th>
+      <th>{{this.displayedColumns[1]}}</th>
+      <th>{{this.displayedColumns[2]}}</th>
+      <th>{{this.displayedColumns[3]}}</th>
+      <th>{{this.displayedColumns[4]}}</th>
+      <th>{{this.displayedColumns[5]}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prozorec of this.tablicaProzorci; let odd = odd" (click)="onSelect(prozorec)" (mouseover)="this.selectedPro=prozorec.id"
+      [class.bg-info]="getSelected(prozorec)">
+
+      <td>{{prozorec.id}} </td>
+      <td>{{prozorec.width}}</td>
+      <td>{{prozorec.height}}</td>
+      <td>{{prozorec.type}}</td>
+      <td>{{prozorec.shema}}</td>
+      <td *ngIf="prozorec.kartinka">
+
+        <img [src]="prozorec.kartinka" alt="" [style.width.px]="50" [style.height.px]="50">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-prozorec-detail [prozorec]="selectedProzorec"></app-prozorec-detail>
+
+<!-- <div>
+  <br> Ширина (стъклопакет):{{staklopaket.width}}
+  <br> Височина (стъклопакет):{{staklopaket.height}}
+</div> -->

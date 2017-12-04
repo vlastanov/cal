@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Prozorec } from '../prozorci.component';
+import { Prozorec } from '../obshta';
+
 import { ProzorecService } from '../prozorec.service';
 
 @Component({
