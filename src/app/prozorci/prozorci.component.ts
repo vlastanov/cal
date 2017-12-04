@@ -73,7 +73,7 @@ export class ProzorciComponent implements OnInit {
 
   }
 
-  onSubmit(val: any) {
+  onSubmit() {
     const id = this.count++;
     this.prozorci.push(new Prozorec(
       id,
