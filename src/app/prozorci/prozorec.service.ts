@@ -11,55 +11,20 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+const prozorci = [
+  { id: 11, width: 10, height: 12, type: 'KBE', shema: 'ednokril' },
+  { id: 12, width: 10, height: 12, type: 'Kommerling 76', shema: 'fix' },
+  { id: 13, width: 10, height: 12, type: 'KMG 4', shema: 'dvukril' },
+];
+
 @Injectable()
 export class ProzorecService {
+  pro = prozorci;
   private prozorciUrl = 'api/prozorci';  // URL to web api
   constructor(private http: HttpClient) { }
 
   getProzorci(): Observable<Prozorec[]> {
-    return this.http.get<Prozorec[]>(this.prozorciUrl)
-      .pipe(
-      catchError(this.handleError('getHeroes', []))
-      );
-  }
-
-  // getProzorec(id: number): Observable<Prozorec> {
-  //   const url = `${this.prozorciUrl}/${id}`;
-  //   return this.http.get<Prozorec>(url).pipe(
-  //     catchError(this.handleError<Prozorec>(`getHero id=${id}`))
-  //   );
-  // }
-
-  // addHero(prozorec: Prozorec): Observable<Prozorec> {
-  //   return this.http.post<Prozorec>(this.prozorciUrl, prozorec, httpOptions).pipe(
-  //     catchError(this.handleError<Prozorec>('addHero'))
-  //   );
-  // }
-
-  // deleteHero(hero: Prozorec | number): Observable<Prozorec> {
-  //   const id = typeof hero === 'number' ? hero : hero.id;
-  //   const url = `${this.prozorciUrl}/${id}`;
-
-  //   return this.http.delete<Prozorec>(url, httpOptions).pipe(
-  //     catchError(this.handleError<Prozorec>('deleteHero'))
-  //   );
-  // }
-
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      console.error(error);
-
-      return of(result as T);
-    };
-  }
-
-  updateHero(prozorec: Prozorec): Observable<any> {
-    return this.http.put(this.prozorciUrl, prozorec, httpOptions)
-      .pipe(
-      catchError(this.handleError<any>('updateHero'))
-      );
+    return of(this.pro);
   }
 
 }

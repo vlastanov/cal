@@ -5,13 +5,6 @@
 
   <div class="row">
 
-    <!-- <div class="col-md-4">
-      <ul class="prozorci">
-        <li *ngFor="let prozorec of prozorci" (click)="onSelect(prozorec)">
-          <span class="badge">{{prozorec.id}}</span> {{prozorec.shema}}
-        </li>
-      </ul>
-    </div> -->
 
     <div class="col-md-4">
 
@@ -134,7 +127,8 @@
             <td>{{prozorec.height}}</td>
             <td>{{prozorec.type}}</td>
             <td>{{prozorec.shema}}</td>
-            <td>
+            <td *ngIf="prozorec.kartinka">
+
               <img [src]="prozorec.kartinka" alt="" [style.width.px]="50" [style.height.px]="50">
             </td>
           </tr>
@@ -165,26 +159,3 @@
   <div *ngSwitchCase="5">There are five products</div>
   <div *ngSwitchDefault>This is the default</div>
 </div>
-
-
-<!-- <div>
-  <label>Hero name:
-    <input #heroName />
-  </label>
-
-  <button (click)="add(heroName.value); heroName.value=''">
-    add
-  </button>
-</div>
-
-
-<button class="delete" title="delete hero" (click)="delete(hero)">x</button>
-
-<ul class="heroes">
-  <li *ngFor="let hero of prozorci">
-    <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </a>
-    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
-  </li>
-</ul> -->

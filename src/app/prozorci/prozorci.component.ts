@@ -54,18 +54,20 @@ export class ProzorciComponent implements OnInit {
     return prozorec.id === this.selectedPro;
   }
 
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('width').value === g.get('height').value
+      ? null : { 'mismatch': true };
+  }
+
   ngOnInit() {
     this.prozorecForm = new FormGroup({
       'width': new FormControl('', [Validators.min(250), Validators.max(2500)]),
       'height': new FormControl('', [Validators.min(250), Validators.max(2500)]),
       'type': new FormControl('', [Validators.required]),
       'shema': new FormControl('', [Validators.required]),
-    }, passwordMatchValidator);
+    }, this.passwordMatchValidator);
 
-    function passwordMatchValidator(g: FormGroup) {
-      return g.get('width').value === g.get('height').value
-        ? null : { 'mismatch': true };
-    }
+
 
     return this.prozorecService.getProzorci()
       .subscribe(prozorci => this.prozorci = prozorci);
@@ -145,20 +147,6 @@ export class ProzorciComponent implements OnInit {
       }
     }
   }
-
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.prozorecService.addHero({ name } as Prozorec)
-  //     .subscribe(hero => {
-  //       this.prozorci.push(hero);
-  //     });
-  // }
-
-  // delete(hero: Prozorec): void {
-  //   this.prozorci = this.prozorci.filter(h => h !== hero);
-  //   this.prozorecService.deleteHero(hero).subscribe();
-  // }
 
 }
 

@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +14,6 @@ import { ProzorecDetailComponent } from './prozorci/prozorec-detail/prozorec-det
 import { ProzorecService } from './prozorci/prozorec.service';
 
 import { ProzorciModule } from './prozorci/prozorci.module';
-import { LearningCenterModule } from './learning-center/learning-center.module';
 
 @NgModule({
   declarations: [
@@ -27,11 +24,7 @@ import { LearningCenterModule } from './learning-center/learning-center.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
     BrowserAnimationsModule,
-    LearningCenterModule,
 
   ],
   providers: [ProzorecService],

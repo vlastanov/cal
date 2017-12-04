@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Prozorec } from '../prozorci.component';
 import { ProzorecService } from '../prozorec.service';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-prozorec-detail',
@@ -14,26 +12,9 @@ export class ProzorecDetailComponent implements OnInit {
   prozorec: Prozorec;
 
   constructor(
-    private route: ActivatedRoute,
-    private prozorecService: ProzorecService,
-     private location: Location) { }
+    private prozorecService: ProzorecService) { }
 
   ngOnInit() {
-    // this.getProzorec();
-  }
-
-  // getProzorec(): void {
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.prozorecService.getProzorec(id)
-  //     .subscribe(prozorec => this.prozorec = prozorec);
-  // }
-
-  goBack(): void {
-    this.location.back();
-  }
-  save(): void {
-    this.prozorecService.updateHero(this.prozorec)
-      .subscribe(() => this.goBack());
   }
 
 }
