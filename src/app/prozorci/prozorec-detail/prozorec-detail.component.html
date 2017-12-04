@@ -1,0 +1,16 @@
+<div *ngIf="prozorec">
+  <h2> Details</h2>
+  <div>
+    <span>id: </span>{{prozorec.id}}</div>
+  <div>
+    <span>width: </span>{{prozorec.width}}</div>
+  <div>
+    <span>Височина: </span>{{prozorec.height}}</div>
+  <div>
+    <span>type: </span>{{prozorec.type| uppercase}}</div>
+  <div>
+    <label>Shema</label>
+    <input [(ngModel)]="prozorec.shema">
+  </div>
+  <button (click)="save()">save</button>
+</div>

@@ -1,0 +1,83 @@
+.selected {
+  background-color: #CFD8DC !important;
+  color: white;
+}
+.prozorci {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+.prozorci li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.prozorci li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
+.prozorci li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.prozorci .text {
+  position: relative;
+  top: -3px;
+}
+.prozorci .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+
+
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: baseline;
+  padding: 8px 24px 0;
+  font-size: 20px;
+  justify-content: space-between;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 32px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.image {
+  background-image: url('../../assets/images/1.jpg');
+  width:100;
+  height:100;
+   background-color: red;
+}
