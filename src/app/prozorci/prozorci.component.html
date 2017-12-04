@@ -119,7 +119,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let prozorec of prozorci; let odd = odd" (click)="onSelect(prozorec)" (mouseover)="this.selectedPro=prozorec.id"
+          <tr *ngFor="let prozorec of prozorci; let odd = odd"
+          (click)="onSelect(prozorec)" (mouseover)="this.selectedPro=prozorec.id"
             [class.bg-info]="getSelected(prozorec)">
 
             <td>{{prozorec.id}} </td>
